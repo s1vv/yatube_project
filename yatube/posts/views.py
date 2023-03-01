@@ -3,12 +3,9 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse('Главная страница приложения post')
+    template = 'posts/index.html'
+    return render(request, template, {'title': 'Последние обновления на сайте'})
 
-
-def group_posts(request):
-    return HttpResponse('Страницы сообщества')
-
-
-def group_posts_name(request, pk):
-    return HttpResponse(f'Страницы сообщества {pk}')
+def group_list(request):
+    template = 'posts/group_list.html'
+    return render(request, template, {'title': 'Лев Толстой – зеркало русской революции.'})
