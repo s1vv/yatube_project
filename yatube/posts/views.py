@@ -11,7 +11,7 @@ def index(request):
         'title': title
     }
     return render(
-        request, template, context 
+        request, template, context
     )
 
 
