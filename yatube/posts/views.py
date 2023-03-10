@@ -8,12 +8,15 @@ def index(request):
     # Одна строка вместо тысячи слов на SQL:
     # в переменную posts будет сохранена выборка из 10 объектов модели Post,
     # отсортированных по полю pub_date по убыванию
+    title = 'Yatube'
+    template = 'posts/index.html'
     posts = Post.objects.order_by('-pub_date')[:10]
     # В словаре context отправляем информацию в шаблон
     context = {
+        'title': title,
         'posts': posts,
     }
-    return render(request, 'posts/index.html', context)
+    return render(request, template, context)
 
 
 def group_posts(request, slug):
@@ -22,7 +25,7 @@ def group_posts(request, slug):
     # В нашем случае в переменную group будут переданы объекты модели Group,
     # поле slug у которых соответствует значению slug в запросе
     group = get_object_or_404(Group, slug=slug)
-
+    template = 'posts/group_list.html'
     # Метод .filter позволяет ограничить поиск по критериям.
     # Это аналог добавления
     # условия WHERE group_id = {group_id}
@@ -31,4 +34,4 @@ def group_posts(request, slug):
         'group': group,
         'posts': posts,
     }
-    return render(request, 'posts/group_list.html', context)
+    return render(request, template, context)
